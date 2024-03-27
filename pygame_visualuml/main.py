@@ -11,15 +11,12 @@ fps = 60
 timer = pygame.time.Clock()
 font = pygame.font.Font('C:\Windows\Fonts\Arial.ttf', 18)
 pygame.display.set_caption("Visual UML")
-
 active_box = None
 boxes = []
 def spawn_box():
     
     box = classobject.classbox(200,200, 200, 100)
     boxes.append(box)
-
-
 
 
 button2 = button.Button("Object", 200, 10)
@@ -37,7 +34,7 @@ while run:
         print('Click2')
 
     for box in boxes:
-        classobject.classbox.draw(box, screen, font)
+        classobject.classbox.draw(box, screen,font)
 
     
     for event in pygame.event.get():
@@ -46,12 +43,7 @@ while run:
                 for num, box in enumerate(boxes):
                     if box.rect.collidepoint(event.pos):
                         active_box = num
-                    if box.text_box.collidepoint(event.pos):
-                        box.active = True
-                    else:
-                        box.active = False
-            
-
+        
         if event.type == pygame.MOUSEBUTTONUP:
             if event.button == 1:
                 active_box = None
@@ -60,14 +52,19 @@ while run:
             if active_box != None:
                 boxes[active_box].rect.move_ip(event.rel)
 
+        if event.type == pygame.TEXTINPUT:
+            box.user_text[-1] += event.text
+
+    #handle special keys
         if event.type == pygame.KEYDOWN:
-            print(event.unicode, event.unicode.isalpha())
-            for num, box in enumerate(boxes):
-                if event.unicode.isalpha() and box.active:
-                    box.user_text = box.user_text + event.unicode
-                if (event.key == pygame.K_BACKSPACE or event.key == pygame.K_DELETE) and box.active:
-                    box.user_text = box.user_text[:-1]
-                print(box.user_text)
+            if event.key == pygame.K_BACKSPACE:
+                box.user_text[-1] = box.user_text[-1][:-1]
+                if len(box.user_text[-1]) == 0:
+                    if len(box.user_text) > 1:
+                        box.user_text = box.user_text[:-1]
+            elif event.key == pygame.K_RETURN:
+                box.user_text.append("")
+            print(box.user_text)
 
         if event.type == pygame.QUIT:
             run = False
