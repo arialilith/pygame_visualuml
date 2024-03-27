@@ -15,7 +15,6 @@ class classbox():
         self.text_box = pygame.Rect(self.x,self.y,100,30)
 
     def draw(self, surface, font):
-
         if self.active:
             boxColor = 'white'
         else:
@@ -41,36 +40,3 @@ class classbox():
             
             self.text_box = pygame.Rect(self.rect.x+5,self.rect.y+(row * 18), 100, 30)
             
-
-        
-"""
-
-
-        if self.cursor%4 == 0 and self.active:
-            self.user_text = self.user_text + "|"
-        self.cursor +=1
-
-        
-        try:
-            if self.user_text[-1] == "|":
-                  self.user_text = self.user_text[:-1]
-        except:
-            pass
-
-        
-        pygame.draw.rect(surface, 'light gray', self.rect, 0, 5)
-        pygame.draw.rect(surface, 'black', self.rect, 2, 5)
-        
-        textSurface = font.render(self.user_text, True, 'black')
-
-        
-
-        self.text_box = pygame.Rect(self.rect.x+5,self.rect.y+5, 100, 30)
-        self.text_box.w = (max(100, textSurface.get_width()+15))
-        self.rect.w = (max(200, textSurface.get_width()+15))
-
-        textBox = pygame.draw.rect(surface, boxColor, self.text_box)
-
-        surface.blit(textSurface, (self.text_box.x+5, self.text_box.y+5))
-"""
-
