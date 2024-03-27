@@ -9,7 +9,7 @@ class Button():
     def draw(self, surface, font):
         action = False
 
-        button_text = font .render(self.text, True, 'black')
+        button_text = font.render(self.text, True, 'black')
         pygame.draw.rect(surface, 'light gray', self.rect, 0 ,5)
         pygame.draw.rect(surface, 'black', self.rect, 2, 5)
 
